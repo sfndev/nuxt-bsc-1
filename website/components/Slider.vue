@@ -1,6 +1,6 @@
 <script setup lang="js">
-import {usePosts } from "~/stores/usePosts"
-import {useHTMLContent} from "~/composables/useHTMLContent"
+import { usePosts } from "~/stores/usePosts"
+import { useHTMLContent } from "~/composables/useHTMLContent"
 
 defineExpose({
   moveLeft,
@@ -31,14 +31,14 @@ const transitionTimeout = ref(null)
 
 
 //utils
-function notFilled(){
+function notFilled() {
   return contentContainer.value.clientWidth < sliderContainer.value.clientWidth
 }
 
-function adjustWithinBounds(current, adjustment,overflow = 0) {
+function adjustWithinBounds(current, adjustment, overflow = 0) {
 
-  const lowerBound = -(contentContainer.value.clientWidth - sliderContainer.value.clientWidth) -overflow
-  const upperBound = 0 +overflow;
+  const lowerBound = -(contentContainer.value.clientWidth - sliderContainer.value.clientWidth) - overflow
+  const upperBound = 0 + overflow;
 
   let newValue = current + adjustment;
   newValue = Math.max(lowerBound, Math.min(upperBound, newValue));
@@ -47,35 +47,35 @@ function adjustWithinBounds(current, adjustment,overflow = 0) {
 }
 
 //visual features
-function addSmoothSlide(time=200 ){
+function addSmoothSlide(time = 200) {
   clearTimeout(transitionTimeout.value)
   transition.value = true
   transitionTimeout.value = setTimeout(() => {
-  transition.value = false
+    transition.value = false
   }, time);
 }
 
-function readjustSlider(){
+function readjustSlider() {
 
   const overflow = sliderElementOverflow.value;
   const rightSide = -(contentContainer.value.clientWidth - sliderContainer.value.clientWidth)
-  if(currentPosition.value < rightSide){
+  if (currentPosition.value < rightSide) {
     currentPosition.value = rightSide;
     return
   }
   const leftSide = 0;
-  if(currentPosition.value > leftSide ){
+  if (currentPosition.value > leftSide) {
     currentPosition.value = 0;
   }
 }
 
 //manual movement
 
-function moveLeft(amount=1){
- if(notFilled()) return;
- addSmoothSlide();
- const distance = sliderContent.value.clientWidth*amount
- currentPosition.value += adjustWithinBounds(currentPosition.value,-distance);
+function moveLeft(amount = 1) {
+  if (notFilled()) return;
+  addSmoothSlide();
+  const distance = sliderContent.value.clientWidth * amount
+  currentPosition.value += adjustWithinBounds(currentPosition.value, -distance);
 
 }
 function moveRight(amount = 1) {
@@ -85,10 +85,10 @@ function moveRight(amount = 1) {
   currentPosition.value += adjustWithinBounds(currentPosition.value, distance);
 
 }
-function move(amount=0){
-   if(notFilled()) return;
-    const distance = sliderContent.value.clientWidth*amount
-    currentPosition.value += adjustWithinBounds(distance);
+function move(amount = 0) {
+  if (notFilled()) return;
+  const distance = sliderContent.value.clientWidth * amount
+  currentPosition.value += adjustWithinBounds(distance);
 }
 
 
@@ -97,7 +97,7 @@ function move(amount=0){
 
 function startDragging(event) {
 
-  if(notFilled()){
+  if (notFilled()) {
     return
   }
 
@@ -119,7 +119,7 @@ function dragging(event) {
   const x = event.type.includes('mouse') ? event.pageX : event.touches[0].pageX;
   const delta = x - lastPosition.value;
   lastPosition.value = x;
-  currentPosition.value += adjustWithinBounds(currentPosition.value,delta,sliderElementOverflow.value);
+  currentPosition.value += adjustWithinBounds(currentPosition.value, delta, sliderElementOverflow.value);
 
   // Calculate velocity for inertia
   const now = performance.now();
@@ -141,75 +141,63 @@ function stopDragging() {
   const inertia = () => {
     inertiaActive.value = true;
 
-    const inertiaFactor = velocity.value * 5  
+    const inertiaFactor = velocity.value * 5
     const friction = 0.99
-    
-    currentPosition.value += adjustWithinBounds(currentPosition.value,inertiaFactor,sliderElementOverflow.value); 
-    velocity.value *= friction; 
 
-    if(currentPosition.value >= 0 ||
-    currentPosition.value <= -(contentContainer.value.clientWidth - sliderContainer.value.clientWidth)){
-       readjustSlider();
+    currentPosition.value += adjustWithinBounds(currentPosition.value, inertiaFactor, sliderElementOverflow.value);
+    velocity.value *= friction;
+
+    if (currentPosition.value >= 0 ||
+      currentPosition.value <= -(contentContainer.value.clientWidth - sliderContainer.value.clientWidth)) {
+      readjustSlider();
       return;
     }
 
     if (Math.abs(velocity.value) > 0.01) {
       requestAnimationFrame(inertia);
-    } else{
+    } else {
       inertiaActive.value = false;
     }
   };
   requestAnimationFrame(inertia);
-  if(!inertiaActive.value){
+  if (!inertiaActive.value) {
     readjustSlider();
   }
 }
 
 //mousewheel
 
-function handleWheel(event){
+function handleWheel(event) {
   if (event.deltaX > 0) {
     moveLeft(0.05)
   } else if (event.deltaX < 0) {
-  moveRight(0.05);
+    moveRight(0.05);
   }
 };
 
 
 //watch
 
-watch(inertiaActive,()=>{
- if(!inertiaActive.value){
+watch(inertiaActive, () => {
+  if (!inertiaActive.value) {
     readjustSlider();
   }
 })
 
-watch(transition,()=>{
- 
+watch(transition, () => {
+
 })
 
 
 </script>
 
 <template>
-  <div
-    ref="sliderContainer"
-    class="slider-container  w-full  overflow-scroll"
-
-    @mousedown="('startDragging')"
-    @touchstart="(startDragging)"
-    @mouseup="('stopDragging')"
-    @mouseleave="('stopDragging')"
-    @touchend="stopDragging"
-    @mousewheel="handleWheel"
-  >
-    <div
-      ref="sliderContent"
-      class=" "
-      :class="{'slider-transition-slow': transition, 'slider-transition-fast' : !transition}"
-      :style="{ transform: `translateX(${currentPosition}px)` }"
-      style="width: max-content"
-    >
+  <div ref="sliderContainer" class="slider-container  w-full  overflow-scroll" @mousedown="('startDragging')"
+    @touchstart="(startDragging)" @mouseup="('stopDragging')" @mouseleave="('stopDragging')" @touchend="stopDragging"
+    @mousewheel="handleWheel">
+    <div ref="sliderContent" class=" "
+      :class="{ 'slider-transition-slow': transition, 'slider-transition-fast': !transition }"
+      :style="{ transform: `translateX(${currentPosition}px)` }" style="width: max-content">
       <div ref="contentContainer" class="flex flex-nowrap gap-5">
         <slot></slot>
       </div>
@@ -218,14 +206,15 @@ watch(transition,()=>{
 </template>
 
 <style scoped>
-
 .slider-container {
   overflow: hidden;
 }
+
 .slider-transition-slow {
   transition: transform 0.2s ease-out;
   will-change: transform;
 }
+
 .slider-transition-fast {
   transition: transform 0.05s ease-out;
   will-change: transform;

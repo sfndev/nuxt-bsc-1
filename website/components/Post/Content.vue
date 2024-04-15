@@ -1,6 +1,6 @@
 <script setup lang="js">
 import axios from "axios";
-import { useHTMLContent }  from '~/composables/useHTMLContent'
+import { useHTMLContent } from '~/composables/useHTMLContent'
 import { ref, onMounted, computed } from 'vue';
 
 const props = defineProps({
@@ -11,13 +11,13 @@ const html = useHTMLContent();
 
 const h1 = ref([])
 const img = ref([])
-onMounted(async() => {
-   h1.value = html.extractAll(props.post.content,'h1')
-   props.post.content = html.removeFirst(props.post.content,'h1')
+onMounted(async () => {
+  h1.value = html.extractAll(props.post.content, 'h1')
+  props.post.content = html.removeFirst(props.post.content, 'h1')
 
   img.value = html.extractImageUrls(props.post.content, 'img')
- 
-  props.post.content = html.addClassesToElements(props.post.content,'img','min-w-full border-4 border-black my-8')
+
+  props.post.content = html.addClassesToElements(props.post.content, 'img', 'min-w-full border-4 border-black my-8')
 });
 
 const formattedDate = computed(() => {
@@ -33,20 +33,16 @@ const post = props?.post;
   <div class="">
     <div v-if="props.post" class="space-y-6 mt-12">
       <h1 class="text-4xl text-center font-bold text-gray-900">{{ props.post.title }}</h1>
-    
+
       <p class="text-center text-gray-500 text-sm mt-2">{{ formattedDate }}</p>
-      <div  class="text-xl text-gray-700" v-if="h1.length > 0">
+      <div class="text-xl text-gray-700" v-if="h1.length > 0">
         <h2 class="font-semibold text-center">{{ h1[0] }}</h2>
       </div>
       <div>
         {{ props.post.category }}
       </div>
       <div class="flex justify-center px-9">
-        <img
-          :src="props.post.featured_image"
-          alt=""
-          class="rounded-lg w-full shadow-md"
-        />
+        <img :src="props.post.featured_image" alt="" class="rounded-lg w-full shadow-md" />
       </div>
       <div class="flex justify-center px-10">
         <div v-html="props.post.content" class="border-black ">

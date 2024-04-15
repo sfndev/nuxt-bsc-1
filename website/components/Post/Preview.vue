@@ -1,9 +1,9 @@
 <script setup lang="js">
 import { defineProps } from 'vue';
-import {useRouter} from 'vue-router'
+import { useRouter } from 'vue-router'
 import { formatDistanceToNow } from 'date-fns';
 const props = defineProps({
-   post: Object
+  post: Object
 });
 
 const router = useRouter();
@@ -20,13 +20,15 @@ function toPost() {
 
 <template>
   <div class="container flex flex-col w-full  ">
-    
+
     <div click="toPost" class="image-container flex justify-center items-center   h-2/3">
-        <img @click="toPost" :src="post.featured_image" alt="" class="w-full h-full object-cover transition-all duration-500 hover:opacity-95  cursor-pointer" />
+      <img @click="toPost" :src="post.featured_image" alt=""
+        class="w-full h-full object-cover transition-all duration-500 hover:opacity-95  cursor-pointer" />
     </div>
 
     <div class="flex flex-col justify-center h-1/3 px-4 border-b  ">
-      <h1 @click="toPost" class="text-lg  hover:text-green-800 font-bold whitespace-nowrap overflow-hidden overflow-ellipsis cursor-pointer">
+      <h1 @click="toPost"
+        class="text-lg  hover:text-green-800 font-bold whitespace-nowrap overflow-hidden overflow-ellipsis cursor-pointer">
         {{ post.title }}
       </h1>
       <div class="  ">
@@ -40,9 +42,8 @@ function toPost() {
 .container {
   aspect-ratio: 10 / 10;
 }
-.image-container {
- 
-}
-.title-container {
-}
+
+.image-container {}
+
+.title-container {}
 </style>

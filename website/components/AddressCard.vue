@@ -1,13 +1,13 @@
 <script setup lang="js">
 import axios from "axios";
-import {useRoute } from "vue-router"
-import {useRouter} from 'vue-router'
+import { useRoute } from "vue-router"
+import { useRouter } from 'vue-router'
 import { formatDistanceToNow } from 'date-fns';
-import {useWindowSize} from "@/composables/useWindowSize";
-import {useInView} from "@/composables/useInView";
-import {useScrollHandler} from "@/composables/useScrollHandler"
-import { useHTMLContent }  from '~/composables/useHTMLContent'
-import  {usePosts} from '~/stores/usePosts'
+import { useWindowSize } from "@/composables/useWindowSize";
+import { useInView } from "@/composables/useInView";
+import { useScrollHandler } from "@/composables/useScrollHandler"
+import { useHTMLContent } from '~/composables/useHTMLContent'
+import { usePosts } from '~/stores/usePosts'
 
 const props = defineProps({
 
@@ -21,7 +21,7 @@ defineExpose({
 
 const route = useRoute();
 const router = useRouter();
-const {smallWindow, mediumWindow, largeWindow} = useWindowSize();
+const { smallWindow, mediumWindow, largeWindow } = useWindowSize();
 const scroll = useScrollHandler();
 
 const wpPosts = usePosts();
@@ -29,7 +29,7 @@ const html = useHTMLContent();
 
 //
 
-onMounted(()=>{
+onMounted(() => {
 
 })
 
@@ -47,7 +47,8 @@ const company = {
 
 </script>
 <template>
-   <div class="flex justify-center items-center border-4 border-black 0 min-w-[350px] border- bg-white rounded-lg shadow-md overflow-hidden ">
+  <div
+    class="flex justify-center items-center border-4 border-black 0 min-w-[350px] border- bg-white rounded-lg shadow-md overflow-hidden ">
     <div class="p-6">
       <h2 class="text-lg font-bold text-gray-900">{{ company.name }}</h2>
       <div class="mt-4 text-gray-600">

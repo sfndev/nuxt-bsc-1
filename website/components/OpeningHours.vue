@@ -1,13 +1,13 @@
 <script setup lang="js">
 import axios from "axios";
-import {useRoute } from "vue-router"
-import {useRouter} from 'vue-router'
+import { useRoute } from "vue-router"
+import { useRouter } from 'vue-router'
 import { formatDistanceToNow } from 'date-fns';
-import {useWindowSize} from "@/composables/useWindowSize";
-import {useInView} from "@/composables/useInView";
-import {useScrollHandler} from "@/composables/useScrollHandler"
-import { useHTMLContent }  from '~/composables/useHTMLContent'
-import  {usePosts} from '~/stores/usePosts'
+import { useWindowSize } from "@/composables/useWindowSize";
+import { useInView } from "@/composables/useInView";
+import { useScrollHandler } from "@/composables/useScrollHandler"
+import { useHTMLContent } from '~/composables/useHTMLContent'
+import { usePosts } from '~/stores/usePosts'
 
 const props = defineProps({
 
@@ -21,7 +21,7 @@ defineExpose({
 
 const route = useRoute();
 const router = useRouter();
-const {smallWindow, mediumWindow, largeWindow} = useWindowSize();
+const { smallWindow, mediumWindow, largeWindow } = useWindowSize();
 const scroll = useScrollHandler();
 
 const wpPosts = usePosts();
@@ -29,7 +29,7 @@ const html = useHTMLContent();
 
 //
 
-onMounted(()=>{
+onMounted(() => {
 
 })
 
@@ -54,16 +54,14 @@ const openingHours = {
   <div class="min-w-[350px] rounded overflow-hidden shadow-lg bg-white p-4">
     <div class="font-bold text-xl mb-2">Opening Hours</div>
     <ul class="">
-      <li v-for="(hours, day) in openingHours" :key="day" 
-      class="flex justify-between mb-1"  
-      >
+      <li v-for="(hours, day) in openingHours" :key="day" class="flex justify-between mb-1">
         <div>
-             <strong>{{ day }}:</strong> 
+          <strong>{{ day }}:</strong>
         </div>
         <div>
-            <span> {{ hours }}</span>
+          <span> {{ hours }}</span>
         </div>
-      
+
       </li>
     </ul>
   </div>

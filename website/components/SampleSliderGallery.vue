@@ -1,14 +1,14 @@
 <script setup lang="js">
 import axios from "axios";
-import {useRoute } from "vue-router"
-import {useRouter} from 'vue-router'
+import { useRoute } from "vue-router"
+import { useRouter } from 'vue-router'
 import { formatDistanceToNow } from 'date-fns';
-import {useWindowSize} from "@/composables/useWindowSize";
-import {useInView} from "@/composables/useInView";
-import {useScrollHandler} from "@/composables/useScrollHandler"
-import { useHTMLContent }  from '~/composables/useHTMLContent'
-import  {usePosts} from '~/stores/usePosts'
-import {useUtils} from '@/composables/useUtils'
+import { useWindowSize } from "@/composables/useWindowSize";
+import { useInView } from "@/composables/useInView";
+import { useScrollHandler } from "@/composables/useScrollHandler"
+import { useHTMLContent } from '~/composables/useHTMLContent'
+import { usePosts } from '~/stores/usePosts'
+import { useUtils } from '@/composables/useUtils'
 
 const props = defineProps({
 
@@ -20,7 +20,7 @@ defineExpose({
 
 const route = useRoute();
 const router = useRouter();
-const {smallWindow, mediumWindow, largeWindow} = useWindowSize();
+const { smallWindow, mediumWindow, largeWindow } = useWindowSize();
 const scroll = useScrollHandler();
 
 const wpPosts = usePosts();
@@ -34,41 +34,43 @@ const slider = ref(null)
 const fullScreenElement = ref(null);
 const fullScreenImage = ref(null)
 
-onMounted(async()=>{
-    const response = await wpPosts.getPost({ category:"galleries",slug:"my-test-post"});
-    let images = html.extractImageUrls(response.content)
-      images =images.map(img => utils.setImageSize(img,500))
+onMounted(async () => {
+  const response = await wpPosts.getPost({ category: "galleries", slug: "my-test-post" });
+  let images = html.extractImageUrls(response.content)
+  images = images.map(img => utils.setImageSize(img, 500))
 
-    imageList.value = [...imageList.value,...images];
- 
+  imageList.value = [...imageList.value, ...images];
+
 })
 
 onUnmounted(() => {
 
 })
 
-function closeFullScreenElement(){
+function closeFullScreenElement() {
   fullScreenImage.value = null;
 }
 
-function openInFullScreen(image){
+function openInFullScreen(image) {
   fullScreenImage.value = image;
 }
 
-function imageSizeUrl(imageUrl,size=500){
+function imageSizeUrl(imageUrl, size = 500) {
 
-  return `${imageUrl.slice(0,imageUrl.indexOf('?'))}?w=${size}`
+  return `${imageUrl.slice(0, imageUrl.indexOf('?'))}?w=${size}`
 }
 
 </script>
 <template>
   <div class="w-full px-8">
-    <FullScreenElement v-if="fullScreenImage" @close="closeFullScreenElement" ref="fullScreenElement" >
-        <img :src="fullScreenImage" class="w-full h-full object-contain" alt="">
+    
+    <FullScreenElement v-if="fullScreenImage" @close="closeFullScreenElement" ref="fullScreenElement">
+      <img :src="fullScreenImage" class="w-full h-full object-contain" alt="">
     </FullScreenElement>
-
+  
     <Slider ref="slider" v-if="imageList.length > 0" class="h-72">
-      <div v-for="image in imageList" :key="image" @click="openInFullScreen(imageSizeUrl(image,2048))" class="ratio h-72">
+      <div v-for="image in imageList" :key="image" @click="openInFullScreen(imageSizeUrl(image, 2048))"
+        class="ratio h-72">
         <div class="w-full h-2/3">
           <img :src="image" class="object-cover h-full w-full" alt="" />
         </div>
@@ -81,7 +83,7 @@ function imageSizeUrl(imageUrl,size=500){
     </Slider>
 
     <div v-else class="flex justify-center items-center h-72">
-        <GadgetsLoader />
+      <GadgetsLoader />
     </div>
 
     <div class="flex justify-between w-full">

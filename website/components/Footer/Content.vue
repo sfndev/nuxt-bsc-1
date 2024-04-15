@@ -1,13 +1,13 @@
 <script setup lang="js">
 import axios from "axios";
-import {useRoute } from "vue-router"
-import {useRouter} from 'vue-router'
+import { useRoute } from "vue-router"
+import { useRouter } from 'vue-router'
 import { formatDistanceToNow } from 'date-fns';
-import {useWindowSize} from "@/composables/useWindowSize";
-import {useInView} from "@/composables/useInView";
-import {useScrollHandler} from "@/composables/useScrollHandler"
-import { useHTMLContent }  from '~/composables/useHTMLContent'
-import  {usePosts} from '~/stores/usePosts'
+import { useWindowSize } from "@/composables/useWindowSize";
+import { useInView } from "@/composables/useInView";
+import { useScrollHandler } from "@/composables/useScrollHandler"
+import { useHTMLContent } from '~/composables/useHTMLContent'
+import { usePosts } from '~/stores/usePosts'
 
 const props = defineProps({
 
@@ -19,7 +19,7 @@ defineExpose({
 
 const route = useRoute();
 const router = useRouter();
-const {smallWindow, mediumWindow, largeWindow} = useWindowSize();
+const { smallWindow, mediumWindow, largeWindow } = useWindowSize();
 const scroll = useScrollHandler();
 
 const wpPosts = usePosts();
@@ -28,8 +28,8 @@ const html = useHTMLContent();
 const myel = ref(null);
 
 
-onMounted(()=>{
-   
+onMounted(() => {
+
 })
 
 onUnmounted(() => {
@@ -37,22 +37,22 @@ onUnmounted(() => {
 })
 
 const social = ref([
-    {
-        title: "youtube",
-        icon: "bi bi-youtube",
-        url:"youtube.com",
-    },
-      {
-        title: "facebook",
-        icon: "bi bi-facebook",
-        url:"facebook.com",
-    },
-      {
-        title: "instagram",
-        icon: "bi bi-instagram",
-        url:"instagram.com",
-    },
-    
+  {
+    title: "youtube",
+    icon: "bi bi-youtube",
+    url: "youtube.com",
+  },
+  {
+    title: "facebook",
+    icon: "bi bi-facebook",
+    url: "facebook.com",
+  },
+  {
+    title: "instagram",
+    icon: "bi bi-instagram",
+    url: "instagram.com",
+  },
+
 ])
 
 const phone = ref([
@@ -72,21 +72,22 @@ const phone = ref([
 
 </script>
 <template>
-    <div class="sticky bottom-0 bg-stone-900 min-h-36 flex justify-center items-center px-2 py-12 border" >
-        <div class="flex flex-wrap justify-evenly items-center gap-4 h-4/5 w-full bg-stone-600">
-            <div  class="h-36 flex-grow min-w-[400px] border-4 ">
-                
-            </div>
-             <div  class="h-36 flex-grow min-w-[400px] border-4 ">
-                
-            </div>
-             <div  class="h-36 flex-grow min-w-[400px] border-4 ">
-                
-            </div>
-              <div  class="h-36 flex-grow min-w-[400px] border-4 ">
-                
-            </div>
-        
-        </div>
+
+  <div class="sticky bottom-0 bg-stone-900 min-h-36 flex justify-center items-center px-2 py-12 border">
+    <div class="flex flex-wrap justify-evenly items-center gap-4 h-4/5 w-full bg-stone-600">
+      <div class="h-36 flex-grow min-w-[400px] border-4 ">
+
+      </div>
+      <div class="h-36 flex-grow min-w-[400px] border-4 ">
+
+      </div>
+      <div class="h-36 flex-grow min-w-[400px] border-4 ">
+
+      </div>
+      <div class="h-36 flex-grow min-w-[400px] border-4 ">
+
+      </div>
+
     </div>
+  </div>
 </template>
