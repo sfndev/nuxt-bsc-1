@@ -1,12 +1,46 @@
 <script setup lang="js">
-import {useRouter } from 'vue-router'
-import { useSlideInMenu } from '../../stores/useSlideInMenu';
-import {useWindowSize} from "@/composables/useWindowSize"
+import axios from "axios";
+import {useRoute } from "vue-router"
+import {useRouter} from 'vue-router'
+import { formatDistanceToNow } from 'date-fns';
+import {useWindowSize} from "@/composables/useWindowSize";
+import {useInView} from "@/composables/useInView";
+import {useScrollHandler} from "@/composables/useScrollHandler"
+import { useHTMLContent }  from '~/composables/useHTMLContent'
+import  {usePosts} from '~/stores/usePosts'
+import {useUtils} from '@/composables/useUtils'
 
-const {largeWindow, mediumWindow, smallWindow} = useWindowSize();
+const props = defineProps({
+
+})
+
+const emit = defineEmits([])
+
+defineExpose({
+
+})
+
+const utils = useUtils();
+const route = useRoute();
 const router = useRouter();
+const {smallWindow, mediumWindow, largeWindow} = useWindowSize();
+const scroll = useScrollHandler();
 
-const mobileMenu = ref(null)
+
+const wpPosts = usePosts();
+const html = useHTMLContent();
+
+//
+
+const mobileMode = ref(false)
+
+onMounted(()=>{
+  
+})
+
+onUnmounted(() => {
+
+})
 
 
 
