@@ -32,12 +32,13 @@ export default defineEventHandler(async (event) => {
   } catch (error) {
     console.error('Failed to send email:', error);
     return new Response(JSON.stringify(
-      { success: false, message: 'Failed to send email' }),
+      { success: false, message: 'Failed to send email', error:error }),
     {
       headers: {
         'Content-Type': 'application/json',
       },
-      status: 500,
+      status: 500
+  
     });
   }
 });

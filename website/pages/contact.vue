@@ -24,6 +24,9 @@ onMounted(() => {
 </script>
 <template>
   <div class="flex flex-col">
+    <div>
+     
+    </div>
     <div class="flex justify-center items-center w-full h-72">
       <div>
         <h1 class="text-5xl">Contact us</h1>

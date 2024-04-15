@@ -49,13 +49,16 @@ onUnmounted(() => {
 
 async function handleSubmit() {
 
+
+
   try {
     buttonText.value = "Sending..."
     const response = await axios.post('/api/contact', form.value);
     buttonText.value = "Email sent!";
     form.value = { email: '', subject: '', message: '' };
   } catch (error) {
-    responseMessage.value =  "Something went wrong!"
+    console.log(error)
+    responseMessage.value =  error.response.data
     buttonText.value = "Try again"
     ;
   }
@@ -104,8 +107,9 @@ function submissionVisuals(){
 
     </form>
 
-    <div class="mb-4 h-12 text-center text-white">
+    <div class="mb-4 h-[100vh] text-center text-white">
       {{ responseMessage }}
+    
     </div>
   </div>
 
