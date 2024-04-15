@@ -1,7 +1,6 @@
 import { ref, onMounted, onUnmounted, computed } from 'vue';
 
 export function useWindowSize() {
-  // Initial state can be set to sensible defaults or null
   const windowWidth = ref(process.client ? window.innerWidth : 0);
   const windowHeight = ref(process.client ? window.innerHeight : 0);
 

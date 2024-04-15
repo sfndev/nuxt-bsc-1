@@ -45,7 +45,17 @@ onUnmounted(() => {
 
 </script>
 <template>
-    <div>
-
+     <div class="  min-h-72 flex justify-center items-center px-2 py-12 border" >
+        <div class="flex flex-wrap justify-evenly items-center gap-4 h-4/5 w-full ">
+            <div  class="flex flex-grow h-36 min-w-[400px] border-4 ">
+         
+            </div>
+            <div  class="flex flex-grow h-36 min-w-[400px] border-4 ">
+          
+            </div>
+            <div  class="flex flex-grow h-36 min-w-[400px] border-4 ">
+                
+            </div>
+        </div>
     </div>
 </template>

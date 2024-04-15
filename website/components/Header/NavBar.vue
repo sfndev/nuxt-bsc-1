@@ -14,7 +14,6 @@ const mobileMenu = ref(null)
 </script>
 
 <template>
-
 <div class="min-w-[400px] border-6 border-black">
   <div class="flex justify-start gap-56 px-2 items-end bg-black h-16 ">
     <div @mousedown="router.push('/')" class="logo flex justify-center items-center h-full   cursor-pointer" >
@@ -24,9 +23,6 @@ const mobileMenu = ref(null)
       <HeaderNavLinks class="text-white text-3xl max-w-2x w-full " />
     </div>   
   </div>
-
-
-
    <HeaderMobileMenu ref="mobileMenu" v-if="!largeWindow" />
    </div>
 

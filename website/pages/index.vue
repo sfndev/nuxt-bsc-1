@@ -20,7 +20,8 @@ onMounted(async() => {
 <template>
   <div>
       <div class="mt-24"></div>
-     <SampleSliderGallery />
+         <SampleSliderGallery />
+         <TemplateComponent/>
   
     
   </div>
