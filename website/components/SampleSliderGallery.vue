@@ -34,8 +34,11 @@ const fullScreenImage = ref(null)
 
 onMounted(async()=>{
     const response = await wpPosts.getPost({ category:"galleries",slug:"my-test-post"});
-    const images = html.extractImageUrls(response.content)
+    let images = html.extractImageUrls(response.content)
+      images =images.map(img => imageSizeUrl(img,500))
+
     imageList.value = [...imageList.value,...images];
+ 
 })
 
 onUnmounted(() => {
@@ -50,6 +53,11 @@ function openInFullScreen(image){
   fullScreenImage.value = image;
 }
 
+function imageSizeUrl(imageUrl,size=500){
+  console.log(imageUrl)
+  return `${imageUrl.slice(0,imageUrl.indexOf('?'))}?w=${size}`
+}
+
 </script>
 <template>
   <div class="w-full px-8">
@@ -58,7 +66,7 @@ function openInFullScreen(image){
     </FullScreenElement>
 
     <Slider ref="slider" v-if="imageList.length > 0" class="h-72">
-      <div v-for="image in imageList" :key="image" @click="openInFullScreen(image)" class="ratio h-72">
+      <div v-for="image in imageList" :key="image" @click="openInFullScreen(imageSizeUrl(image,2048))" class="ratio h-72">
         <div class="w-full h-2/3">
           <img :src="image" class="object-cover h-full w-full" alt="" />
         </div>
