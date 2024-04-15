@@ -1,12 +1,12 @@
 <script setup lang="js">
 import axios from "axios"
 
-import { usePosts } from '~/stores/usePosts'
+import { useWpPosts } from '~/stores/useWpPosts'
 
 import { useWindowSize } from "@/composables/useWindowSize"
 import { useInView } from "@/composables/useInView"
 import { useScrollHandler } from "@/composables/useScrollHandler"
-const posts = usePosts();
+const wpPosts = useWpPosts();
 const html = useHTMLContent();
 const imageList = ref([])
 

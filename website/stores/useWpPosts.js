@@ -6,7 +6,7 @@ const BASE_URL = "https://public-api.wordpress.com/rest/v1.1/sites/groovediggers
 
 
 
-export const usePosts = defineStore('posts', {
+export const useWpPosts = defineStore('posts', {
   state: () => ({
     posts: [],
     category: '',

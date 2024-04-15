@@ -23,38 +23,18 @@ onMounted(() => {
 
 </script>
 <template>
-  <div class="flex flex-col">
-    <div>
+<div>
+ 
 
-    </div>
-    <div class="flex justify-center items-center w-full h-72">
-      <div>
-        <h1 class="text-5xl">Contact us</h1>
-      </div>
-    </div>
-
-    <div class="flex flex-wrap justify-around w-full">
-      <div class="flex flex-grow justify-center min-w-[350px] ">
-        <div class="flex flex-col justify-center items-center w-full h-full">
-          <OpeningHours class="w-full " />
-          <AddressCard class="w-full" />
-
-        </div>
-
-      </div>
-      <div class="flex justify-center items-center flex-grow-[1.5] min-w-[350px] p-14">
-        <EmailForm class="w-full min-w-[350px]" />
-      </div>
-    </div>
-
-    <div class="flex flex-wrap justify-around w-full border-4">
-      <div class="flex flex-grow justify-center min-w-[350px] bg-slate-900 px-">
-
-      </div>
-      <div class="flex justify-center items-center flex-grow p-12 min-w-[350px] bg-pink-400">
-        <GoogleMap class="h-42 min-w-[350px]" />
-      </div>
-    </div>
-
-  </div>
+</div>
 </template>
+
+<style scoped>
+.background-image {
+  background-image: url('https://c02.purpledshub.com/uploads/sites/48/2023/02/why-sky-blue-2db86ae.jpg?w=1410&webp=1'); /* Set your image URL here */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Do not repeat the background */
+  background-size: cover; /* Scale the background to be as large as possible so that the background area is completely covered by the background image */
+
+}
+</style>

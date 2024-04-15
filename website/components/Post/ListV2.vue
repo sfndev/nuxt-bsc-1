@@ -1,7 +1,7 @@
 <script setup lang="js">
 import axios from "axios"
 import { useSlideInMenu } from '~/stores/useSlideInMenu'
-import  {usePosts} from '~/stores/usePosts'
+import { useWpPosts } from '~/stores/useWpPosts'
 import { onMounted, nextTick } from 'vue';
 import {useWindowSize} from "@/composables/useWindowSize"
 import {useInView, useNotInView} from "@/composables/useInView"
@@ -13,7 +13,7 @@ const props = defineProps({
 
 const {largeWindow,mediumWindow,smallWindow} = useWindowSize();
 const {create } = useScrollHandler();
-const posts = usePosts();
+const wpPosts = useWpPosts();
 
 const postList = ref([])
 
@@ -22,14 +22,14 @@ const loaderInView = ref(true);
 const hasMore = ref(true)
 
 async function getPosts(){
-  const response= await posts.get(props.category)
+  const response= await wpPosts.get(props.category)
   postList.value = response
   hasMore.value = [...response].length > 0
 }
 
 async function load(){
 
-  const response = await posts.nextPage()
+  const response = await wpPosts.nextPage()
   postList.value = [...postList.value, ...response]
   hasMore.value = [...response].length > 0
   return [...response];

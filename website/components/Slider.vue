@@ -1,5 +1,5 @@
 <script setup lang="js">
-import { usePosts } from "~/stores/usePosts"
+import { useWpPosts } from '~/stores/useWpPosts'
 import { useHTMLContent } from "~/composables/useHTMLContent"
 
 defineExpose({

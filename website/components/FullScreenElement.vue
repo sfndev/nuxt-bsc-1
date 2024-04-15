@@ -7,7 +7,7 @@ import { useWindowSize } from "@/composables/useWindowSize";
 import { useInView } from "@/composables/useInView";
 import { useScrollHandler } from "@/composables/useScrollHandler"
 import { useHTMLContent } from '~/composables/useHTMLContent'
-import { usePosts } from '~/stores/usePosts'
+import { useWpPosts } from '~/stores/useWpPosts'
 
 const props = defineProps({
     content: Object
@@ -24,7 +24,7 @@ const router = useRouter();
 const { smallWindow, mediumWindow, largeWindow } = useWindowSize();
 const scroll = useScrollHandler();
 
-const wpPosts = usePosts();
+const wpWpPosts = usePosts();
 const html = useHTMLContent();
 
 //
