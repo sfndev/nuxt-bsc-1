@@ -21,7 +21,7 @@ onMounted(async() => {
   <div>
       <div class="mt-24"></div>
      <SampleSliderGallery />
-     <VideoTest/>
+  
     
   </div>
 </template>

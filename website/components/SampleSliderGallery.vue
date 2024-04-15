@@ -56,7 +56,7 @@ function openInFullScreen(image){
 }
 
 function imageSizeUrl(imageUrl,size=500){
-  console.log(imageUrl)
+
   return `${imageUrl.slice(0,imageUrl.indexOf('?'))}?w=${size}`
 }
 
