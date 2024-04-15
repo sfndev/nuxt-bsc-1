@@ -55,13 +55,13 @@ async function handleSubmit() {
     buttonText.value = "Email sent!";
     form.value = { email: '', subject: '', message: '' };
   } catch (error) {
-    responseMessage.value =  "Something went wrong!"
+    responseMessage.value = "Something went wrong!"
     buttonText.value = "Try again"
-    ;
+      ;
   }
 }
 
-function submissionVisuals(){
+function submissionVisuals() {
 
 }
 
@@ -75,31 +75,27 @@ function submissionVisuals(){
       <div class="flex flex-wrap gap-4 w-full ">
         <div class=" flex-grow">
           <label for="firstName" class=""></label>
-          <input id="firstName" v-model="form.firstName" type="text" placeholder="First Name"
-            class="fields w-full  ">
+          <input id="firstName" v-model="form.firstName" type="text" placeholder="First Name" class="fields w-full  ">
         </div>
         <div class=" flex-grow">
           <label for="lastName"></label>
-          <input id="lastName" v-model="form.lastName" type="text"  placeholder="Last Name" 
-          class="fields w-full ">
+          <input id="lastName" v-model="form.lastName" type="text" placeholder="Last Name" class="fields w-full ">
         </div>
       </div>
       <div class="flex flex-col ">
         <label for="email" class=""></label>
-        <input id="email" v-model="form.email" type="email" required placeholder="Email"
-          class=" fields h-8  ">
+        <input id="email" v-model="form.email" type="email" required placeholder="Email" class=" fields h-8  ">
       </div>
 
 
       <div class="">
         <label for="message" class=""></label>
-        <textarea id="message" v-model="form.message" required 
-        class="w-full fields " rows="8"
+        <textarea id="message" v-model="form.message" required class="w-full fields " rows="8"
           placeholder="Tell us..."></textarea>
       </div>
       <div class="">
-        <button type="submit" 
-        class="w-full  bg-amber-300 h-12 font-extrabold text-3xl text-black">{{buttonText }}</button>
+        <button type="submit" class="w-full  bg-amber-300 h-12 font-extrabold text-3xl text-black">{{ buttonText
+          }}</button>
       </div>
 
     </form>
@@ -112,10 +108,7 @@ function submissionVisuals(){
 </template>
 
 <style scoped>
-  .fields{
-    @apply bg-blue-950 placeholder-white  text-white outline-none px-1 
-    
-    border-b min-h-12
-  }
-
+.fields {
+  @apply bg-blue-950 placeholder-white text-white outline-none px-1 border-b min-h-12
+}
 </style>
