@@ -55,10 +55,6 @@ function openInFullScreen(image) {
   fullScreenImage.value = image;
 }
 
-function imageSizeUrl(imageUrl, size = 500) {
-
-  return `${imageUrl.slice(0, imageUrl.indexOf('?'))}?w=${size}`
-}
 
 </script>
 <template>

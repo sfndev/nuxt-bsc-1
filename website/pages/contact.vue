@@ -56,8 +56,5 @@ onMounted(() => {
       </div>
     </div>
 
-    <!-- 
-    <AddressCard />
-    <SocialIcons class="" /> -->
   </div>
 </template>
