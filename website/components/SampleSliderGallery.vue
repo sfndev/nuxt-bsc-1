@@ -8,6 +8,7 @@ import {useInView} from "@/composables/useInView";
 import {useScrollHandler} from "@/composables/useScrollHandler"
 import { useHTMLContent }  from '~/composables/useHTMLContent'
 import  {usePosts} from '~/stores/usePosts'
+import {useUtils} from '@/composables/useUtils'
 
 const props = defineProps({
 
@@ -24,6 +25,7 @@ const scroll = useScrollHandler();
 
 const wpPosts = usePosts();
 const html = useHTMLContent();
+const utils = useUtils();
 //
 
 const imageList = ref([]);
@@ -35,7 +37,7 @@ const fullScreenImage = ref(null)
 onMounted(async()=>{
     const response = await wpPosts.getPost({ category:"galleries",slug:"my-test-post"});
     let images = html.extractImageUrls(response.content)
-      images =images.map(img => imageSizeUrl(img,500))
+      images =images.map(img => utils.setImageSize(img,500))
 
     imageList.value = [...imageList.value,...images];
  
