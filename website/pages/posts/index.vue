@@ -5,6 +5,6 @@
 </script>
 <template>
   <div>
-    <PostList category="concerts" />
+    <PostListV2 category="concerts" />
   </div>
 </template>
