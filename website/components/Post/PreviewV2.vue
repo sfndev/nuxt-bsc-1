@@ -32,7 +32,7 @@ const formattedDate = computed(() => {
   return formatDistanceToNow(new Date(props.post.date), { addSuffix: true });
 });
 
-
+//aaa
 
 function toPost() {
   router.push(`/posts/${props.post.slug}`);
