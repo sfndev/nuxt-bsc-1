@@ -73,23 +73,23 @@ function toPost() {
 </script>
 <template>
 
-  <div class="  border-4 container-ratio w-full bg-gray-300 flex border-4 border-black ">
+  <div class="  border-4  w-full bg-gray-300 flex  border-black " style="aspect-ratio: 5 / 1;">
 
-    <div class=" w-1/3 h-full bg-blue-500">
-      <img :src="post.featured_image" class="w-full h-full object-cover"  alt="">
+    <div class=" w-1/6 h-full bg-blue-500">
+      <img :src="post.featured_image" class=" h-full w-full object-contain"    alt="">
     </div>
 
 
-    <div class="flex flex-col justify-between w-2/3 h-full  px-2 py-4 bg-red-800 ">
+    <div class="flex flex-col justify-between w-2/3 h-full  px-2 py-4  ">
       <div class=" ">
         <h1 class=" sm:text-3xl text-2xl  font-semibold text-gray-800 mb-3 clamp-2 break-words">
-          {{ post.title.length > 50 ? `${post.title.slice(1, 51)}...` : post.title }}</h1>
+          {{ post.title.length > 50 ? `${post.title}...` : post.title }}</h1>
       </div>
       <div  ref="excerptContainer" class="text-gray-700   mb-4 break-words excerpt  "
       :style="excerptLineClamp"
       >
         <p class="h-full">
-          {{ html.extractAll(post.excerpt, 'p')[0].replace("[&hellip;]", "").slice(1, 201) }}
+          {{ html.extractAll(post.excerpt, 'p')[0].replace("[&hellip;]", "") }}
           <span @click="toPost" class="hover:font-bold transition-all duration-200 cursor-pointer">...</span>
         </p>
 
