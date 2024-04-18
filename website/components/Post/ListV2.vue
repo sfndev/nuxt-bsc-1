@@ -63,13 +63,10 @@ nextTick(() =>{
 })
 </script>
 <template>
-  <div v-if="postList" class="flex flex-col items-center pt-0">
-    <div class="flex flex-col items-center gap-4">
-      <div v-for="post in postList" :key="post.title" class="">
-        <PostPreviewV2 :post="post" class="" />
-      </div>
+  <div v-if="postList" class="flex justify-center items-center pt-0">
+    <div class="flex flex-col justify-center  items-center gap-4 w-full bg-red-800 ">
+        <PostPreviewV2 v-for="post in postList" :key="post.title" :post="post" class="" />
     </div>
-
     <div v-if="hasMore" ref="loader" class="flex justify-center h-12">
       <GadgetsLoader />
     </div>
