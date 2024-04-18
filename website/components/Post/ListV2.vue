@@ -6,6 +6,7 @@ import { onMounted, nextTick } from 'vue';
 import {useWindowSize} from "@/composables/useWindowSize"
 import {useInView, useNotInView} from "@/composables/useInView"
 import {useScrollHandler} from "@/composables/useScrollHandler"
+import PreviewV2 from "~/components/Post/PreviewV2.vue";
 
 const props = defineProps({
     category:""
@@ -63,10 +64,10 @@ nextTick(() =>{
 })
 </script>
 <template>
-  <div v-if="postList" class="flex flex-col justify-center items-center bg-cyan-700 w-full  pt-0">
-    <div class="flex flex-col justify-center items-center gap-4 px-12  ">
-        <PostPreviewV2  v-for="post in postList" :key="post.title" :post="post" class="" />
-    </div>
+  <div v-if="postList" class="flex flex-col justify-center items-center  border-black w-full  pt-0">
+
+
+    <PreviewV2  v-for="post in postList" :post="post" />
 
     <div v-if="hasMore" ref="loader" class="flex justify-center h-12">
       <GadgetsLoader />
@@ -74,6 +75,14 @@ nextTick(() =>{
   </div>
 </template>
 <style scoped>
+
+.image-ratio {
+  aspect-ratio: 10 / 10;
+}
+.container-ratio{
+  aspect-ratio: 30 / 10;
+}
+
 .thumbnail-grid {
   @apply grid 
     grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3

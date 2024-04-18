@@ -4,7 +4,9 @@
 
 </script>
 <template>
-  <div class="">
-    <PostListV2 category="concerts" />
+  <div class="flex w-full">
+    <PostListV2 category="concerts" class="" />
+
+
   </div>
 </template>

@@ -18,22 +18,53 @@ const scroll = useScrollHandler();
 const wpPosts = useWpPosts();
 const html = useHTMLContent();
 
+
+
 const props = defineProps({
   post: Object
 });
 
 
 const post = props.post;
+
+const excerptContainer = ref(null);
+const excerptContainerWidth = ref(null);
+
+const excerptLineClamp = computed(() => {
+  return {
+    display: '-webkit-box',
+    '-webkit-box-orient': 'vertical',
+    '-webkit-line-clamp': Math.floor(excerptContainerWidth.value / 100) -1,
+    overflow: 'hidden'
+  };
+});
+const formattedDate = computed(() => {
+  return formatDistanceToNow(new Date(props.post.date), {addSuffix: true});
+});
+
+
 onBeforeMount(() => {
 
 })
 
 onMounted(() => {
+  updateExcerptContainerWidth()
+  window.addEventListener('resize',updateExcerptContainerWidth)
 })
 
-const formattedDate = computed(() => {
-  return formatDistanceToNow(new Date(props.post.date), {addSuffix: true});
-});
+function updateExcerptContainerWidth(){
+  excerptContainerWidth.value = excerptContainer.value ? excerptContainer.value.clientWidth : 0;
+}
+
+
+
+
+
+
+
+const lineClamp = computed(() => {
+
+})
 
 
 function toPost() {
@@ -42,20 +73,25 @@ function toPost() {
 </script>
 <template>
 
+  <div class="  border-4 container-ratio w-full bg-gray-300 flex border-4 border-black ">
 
-  <div class="min-h-1 flex flex-wrap justify-center items-center p-2 border  bg-amber-950 lg:w-2/3 ">
-    <div class=" flex flex-grow justify-center items-center lg:w-1/3 w-full  min-w-[180px] image-ratio  border-4 bg-red-800">
-      <img :src="post.featured_image" class="w-full h-full  object-cover " alt="">
+    <div class=" w-1/3 h-full bg-blue-500">
+      <img :src="post.featured_image" class="w-full h-full object-cover"  alt="">
     </div>
-    <div class=" flex-col flex-grow  lg:w-2/3   w-full  min-w-[180px]  border-4 bg-blue-400 ">
-      <div>
-        <h1 class="text-3xl font-semibold text-gray-800 mb-3">
+
+
+    <div class="flex flex-col justify-between w-2/3 h-full  px-2 py-4 bg-red-800 ">
+      <div class=" ">
+        <h1 class=" sm:text-3xl text-2xl  font-semibold text-gray-800 mb-3 clamp-2 break-words">
           {{ post.title.length > 50 ? `${post.title.slice(1, 51)}...` : post.title }}</h1>
       </div>
-      <div class="text-gray-700 text-base  mb-4 break-words">
-
-        {{ html.extractAll(post.excerpt, 'p')[0].replace("[&hellip;]", "").slice(1, 201) }}
-        <span @click="toPost" class="hover:font-bold transition-all duration-200 cursor-pointer">...</span>
+      <div  ref="excerptContainer" class="text-gray-700   mb-4 break-words excerpt  "
+      :style="excerptLineClamp"
+      >
+        <p class="h-full">
+          {{ html.extractAll(post.excerpt, 'p')[0].replace("[&hellip;]", "").slice(1, 201) }}
+          <span @click="toPost" class="hover:font-bold transition-all duration-200 cursor-pointer">...</span>
+        </p>
 
       </div>
       <div class="flex justify-between items-center">
@@ -66,10 +102,7 @@ function toPost() {
         </button>
       </div>
     </div>
-
   </div>
-
-
 </template>
 
 <style scoped>
@@ -77,8 +110,19 @@ function toPost() {
   aspect-ratio: 10 / 10;
 }
 .container-ratio{
-  aspect-ratio: 20 / 10;
+  aspect-ratio: 1 / 1;
 }
+
+
+
+.clamp-2{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+
 .image-container {
 }
 
