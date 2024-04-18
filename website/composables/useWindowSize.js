@@ -5,10 +5,10 @@ export function useWindowSize() {
   const windowHeight = ref(process.client ? window.innerHeight : 0);
 
   const extraSmall = ref(0);
-  const small = ref(400);
+  const small = ref(475);
   const medium = ref(768);
-  const large = ref(992);
-  const extraLarge = ref(1200);
+  const large = ref(1024);
+  const extraLarge = ref(1280);
 
   const extraSmallWindow = computed(() => windowWidth.value < small.value);
   const smallWindow = computed(() => windowWidth.value < medium.value);

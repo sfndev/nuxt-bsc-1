@@ -1,18 +1,18 @@
 <script setup lang="js">
 import axios from "axios";
-import { useRoute } from "vue-router"
-import { useRouter } from 'vue-router'
-import { formatDistanceToNow } from 'date-fns';
-import { useWindowSize } from "@/composables/useWindowSize";
-import { useInView } from "@/composables/useInView";
-import { useScrollHandler } from "@/composables/useScrollHandler"
-import { useHTMLContent } from '~/composables/useHTMLContent'
-import { useWpPosts } from '~/stores/useWpPosts'
+import {useRoute} from "vue-router"
+import {useRouter} from 'vue-router'
+import {formatDistanceToNow} from 'date-fns';
+import {useWindowSize} from "@/composables/useWindowSize";
+import {useInView} from "@/composables/useInView";
+import {useScrollHandler} from "@/composables/useScrollHandler"
+import {useHTMLContent} from '~/composables/useHTMLContent'
+import {useWpPosts} from '~/stores/useWpPosts'
 
 
 const route = useRoute();
 const router = useRouter();
-const { smallWindow, mediumWindow, largeWindow } = useWindowSize();
+const {smallWindow, mediumWindow, largeWindow} = useWindowSize();
 const scroll = useScrollHandler();
 
 const wpPosts = useWpPosts();
@@ -24,27 +24,30 @@ const props = defineProps({
 
 
 const post = props.post;
+onBeforeMount(() => {
+
+})
 
 onMounted(() => {
 })
 
 const formattedDate = computed(() => {
-  return formatDistanceToNow(new Date(props.post.date), { addSuffix: true });
+  return formatDistanceToNow(new Date(props.post.date), {addSuffix: true});
 });
 
-//aaa
 
 function toPost() {
   router.push(`/posts/${props.post.slug}`);
 }
 </script>
 <template>
-  <div class="flex flex-wrap justify-center w-full">
-    <div class="h-72 w-96 min-w-[400px] bg-blue-500 flex-grow">
-      <img @click="toPost" :src="post.featured_image" alt=""
-        class="w-full h-full object-cover hover:opacity-95 transition-all duration-200 cursor-pointer" />
+
+
+  <div class="min-h-1 flex flex-wrap justify-center items-center p-2 border  bg-amber-950 lg:w-2/3 ">
+    <div class=" flex flex-grow justify-center items-center lg:w-1/3 w-full  min-w-[180px] image-ratio  border-4 bg-red-800">
+      <img :src="post.featured_image" class="w-full h-full  object-cover " alt="">
     </div>
-    <div class="flex flex-col items-around h-72 w-96 min-w-[400px] flex-grow px-4">
+    <div class=" flex-col flex-grow  lg:w-2/3   w-full  min-w-[180px]  border-4 bg-blue-400 ">
       <div>
         <h1 class="text-3xl font-semibold text-gray-800 mb-3">
           {{ post.title.length > 50 ? `${post.title.slice(1, 51)}...` : post.title }}</h1>
@@ -58,21 +61,27 @@ function toPost() {
       <div class="flex justify-between items-center">
         <span @click="toPost" class="text-sm text-gray-600 hover:underline">{{ formattedDate }}</span>
         <button @click="toPost"
-          class="px-4 py-2 bg-blue-500 text-white font-semibold text-xs rounded hover:bg-blue-600 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                class="px-4 py-2 bg-blue-500 text-white font-semibold text-xs rounded hover:bg-blue-600 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
           Read more
         </button>
       </div>
     </div>
+
   </div>
+
 
 </template>
 
 <style scoped>
-.ratio {
+.image-ratio {
   aspect-ratio: 10 / 10;
 }
+.container-ratio{
+  aspect-ratio: 20 / 10;
+}
+.image-container {
+}
 
-.image-container {}
-
-.title-container {}
+.title-container {
+}
 </style>
