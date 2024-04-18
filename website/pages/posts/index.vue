@@ -4,7 +4,7 @@
 
 </script>
 <template>
-  <div>
+  <div class="">
     <PostListV2 category="concerts" />
   </div>
 </template>
