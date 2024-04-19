@@ -64,7 +64,7 @@ nextTick(() =>{
 })
 </script>
 <template>
-  <div v-if="postList" class="flex flex-col justify-center items-center  border-black w-full  pt-0">
+  <div v-if="postList" class="flex flex-col space-y-4 px-6   justify-center items-center  border-black w-full  pt-0">
 
     <PreviewV2 v-for="post in postList" :post="post" class=" " ></PreviewV2>
 <!--    <PreviewV2  v-for="post in postList" :post="post" />-->

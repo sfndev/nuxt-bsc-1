@@ -19,7 +19,6 @@ const wpPosts = useWpPosts();
 const html = useHTMLContent();
 
 
-
 const props = defineProps({
   post: Object
 });
@@ -34,7 +33,7 @@ const excerptLineClamp = computed(() => {
   return {
     display: '-webkit-box',
     '-webkit-box-orient': 'vertical',
-    '-webkit-line-clamp': Math.floor(excerptContainerWidth.value / 100) -1,
+    '-webkit-line-clamp': Math.floor(excerptContainerWidth.value / 100) - 1,
     overflow: 'hidden'
   };
 });
@@ -49,17 +48,12 @@ onBeforeMount(() => {
 
 onMounted(() => {
   updateExcerptContainerWidth()
-  window.addEventListener('resize',updateExcerptContainerWidth)
+  window.addEventListener('resize', updateExcerptContainerWidth)
 })
 
-function updateExcerptContainerWidth(){
+function updateExcerptContainerWidth() {
   excerptContainerWidth.value = excerptContainer.value ? excerptContainer.value.clientWidth : 0;
 }
-
-
-
-
-
 
 
 const lineClamp = computed(() => {
@@ -73,10 +67,12 @@ function toPost() {
 </script>
 <template>
 
-  <div class="  border-4  w-full bg-gray-300 flex  border-black " style="aspect-ratio: 5 / 1;">
+  <div class="    max-h-[30vh] w-full  flex  " style="aspect-ratio: 5 / 1;">
 
-    <div class=" w-1/6 h-full bg-blue-500">
-      <img :src="post.featured_image" class=" h-full w-full object-contain"    alt="">
+    <div class="flex justify-end   w-1/3 h-full">
+      <div class=" w-full border-black " style="aspect-ratio: 1.618">
+        <img :src="post.featured_image" class="h-full w-full object-right-top   object-contain" alt="">
+      </div>
     </div>
 
 
@@ -85,8 +81,8 @@ function toPost() {
         <h1 class=" sm:text-3xl text-2xl  font-semibold text-gray-800 mb-3 clamp-2 break-words">
           {{ post.title.length > 50 ? `${post.title}...` : post.title }}</h1>
       </div>
-      <div  ref="excerptContainer" class="text-gray-700   mb-4 break-words excerpt  "
-      :style="excerptLineClamp"
+      <div ref="excerptContainer" class="text-gray-700   mb-4 break-words excerpt  "
+           :style="excerptLineClamp"
       >
         <p class="h-full">
           {{ html.extractAll(post.excerpt, 'p')[0].replace("[&hellip;]", "") }}
@@ -109,13 +105,13 @@ function toPost() {
 .image-ratio {
   aspect-ratio: 10 / 10;
 }
-.container-ratio{
+
+.container-ratio {
   aspect-ratio: 1 / 1;
 }
 
 
-
-.clamp-2{
+.clamp-2 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
