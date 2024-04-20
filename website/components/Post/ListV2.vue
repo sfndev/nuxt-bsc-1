@@ -67,8 +67,6 @@ nextTick(() =>{
   <div v-if="postList" class="flex flex-col space-y-4 px-6   justify-center items-center  border-black w-full  pt-0">
 
     <PreviewV2 v-for="post in postList" :post="post" class=" " ></PreviewV2>
-<!--    <PreviewV2  v-for="post in postList" :post="post" />-->
-
     <div v-if="hasMore" ref="loader" class="flex justify-center h-12">
       <GadgetsLoader />
     </div>

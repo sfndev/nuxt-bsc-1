@@ -1,6 +1,6 @@
 <script setup lang="js">
-import { useWpPosts } from '~/stores/useWpPosts'
-import { useHTMLContent } from "~/composables/useHTMLContent"
+import {useWpPosts} from '~/stores/useWpPosts'
+import {useHTMLContent} from "~/composables/useHTMLContent"
 
 defineExpose({
   moveLeft,
@@ -78,6 +78,7 @@ function moveLeft(amount = 1) {
   currentPosition.value += adjustWithinBounds(currentPosition.value, -distance);
 
 }
+
 function moveRight(amount = 1) {
   if (notFilled()) return;
   addSmoothSlide();
@@ -85,12 +86,12 @@ function moveRight(amount = 1) {
   currentPosition.value += adjustWithinBounds(currentPosition.value, distance);
 
 }
+
 function move(amount = 0) {
   if (notFilled()) return;
   const distance = sliderContent.value.clientWidth * amount
-  currentPosition.value += adjustWithinBounds(distance);
+  currentPosition.value += adjustWithinBounds(currentPosition.value, distance);
 }
-
 
 
 //dragging
@@ -148,7 +149,7 @@ function stopDragging() {
     velocity.value *= friction;
 
     if (currentPosition.value >= 0 ||
-      currentPosition.value <= -(contentContainer.value.clientWidth - sliderContainer.value.clientWidth)) {
+        currentPosition.value <= -(contentContainer.value.clientWidth - sliderContainer.value.clientWidth)) {
       readjustSlider();
       return;
     }
@@ -192,12 +193,16 @@ watch(transition, () => {
 </script>
 
 <template>
-  <div ref="sliderContainer" class="slider-container  w-full  overflow-scroll" @mousedown="('startDragging')"
-    @touchstart="(startDragging)" @mouseup="('stopDragging')" @mouseleave="('stopDragging')" @touchend="stopDragging"
-    @mousewheel="handleWheel">
+  <div ref="sliderContainer" class="slider-container  w-full  overflow-scroll"
+       @mousedown="('startDragging')"
+       @touchstart="(startDragging)"
+       @mouseup="('stopDragging')"
+       @mouseleave="('stopDragging')"
+       @touchend="stopDragging"
+       @mousewheel="handleWheel">
     <div ref="sliderContent" class=" "
-      :class="{ 'slider-transition-slow': transition, 'slider-transition-fast': !transition }"
-      :style="{ transform: `translateX(${currentPosition}px)` }" style="width: max-content">
+         :class="{ 'slider-transition-slow': transition, 'slider-transition-fast': !transition }"
+         :style="{ transform: `translateX(${currentPosition}px)` }" style="width: max-content">
       <div ref="contentContainer" class="flex flex-nowrap gap-5">
         <slot></slot>
       </div>

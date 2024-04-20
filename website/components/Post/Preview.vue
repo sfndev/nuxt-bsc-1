@@ -19,7 +19,7 @@ function toPost() {
 </script>
 
 <template>
-  <div class="container flex flex-col w-full  ">
+  <div class="container flex flex-col ">
 
     <div click="toPost" class="image-container flex justify-center items-center   h-2/3">
       <img @click="toPost" :src="post.featured_image" alt=""

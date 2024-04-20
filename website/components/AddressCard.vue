@@ -48,7 +48,7 @@ const company = {
 </script>
 <template>
   <div
-    class="flex justify-center items-center border-4 border-black 0 min-w-[350px] border- bg-white rounded-lg shadow-md overflow-hidden ">
+    class="flex justify-center items-center border-4 border-black 0 border- bg-white rounded-lg shadow-md overflow-hidden ">
     <div class="p-6">
       <h2 class="text-lg font-bold text-gray-900">{{ company.name }}</h2>
       <div class="mt-4 text-gray-600">

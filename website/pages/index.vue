@@ -20,7 +20,7 @@ onMounted(async () => {
 <template>
   <div>
     <div class="mt-24">
-
+      <SampleSliderGallery category="galleries" slug="my-test-post"/>
     </div>
   </div>
 </template>

@@ -14,9 +14,7 @@ const img = ref([])
 onMounted(async () => {
   h1.value = html.extractAll(props.post.content, 'h1')
   props.post.content = html.removeFirst(props.post.content, 'h1')
-
   img.value = html.extractImageUrls(props.post.content, 'img')
-
   props.post.content = html.addClassesToElements(props.post.content, 'img', 'min-w-full border-4 border-black my-8')
 });
 

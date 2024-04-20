@@ -11,7 +11,8 @@ import { useWpPosts } from '~/stores/useWpPosts'
 import { useUtils } from '@/composables/useUtils'
 
 const props = defineProps({
-
+  category: String,
+  slug: String,
 })
 
 defineExpose({
@@ -35,9 +36,9 @@ const fullScreenElement = ref(null);
 const fullScreenImage = ref(null)
 
 onMounted(async () => {
-  const response = await wpPosts.getPost({ category: "galleries", slug: "my-test-post" });
+  const response = await wpPosts.getPost({ category: props.category, slug: props.slug });
   let images = html.extractImageUrls(response.content)
-  images = images.map(img => utils.setImageSize(img, 500))
+  images = images.map(img => utils.setImageSize(img, 512))
 
   imageList.value = [...imageList.value, ...images];
 
@@ -65,7 +66,7 @@ function openInFullScreen(image) {
     </FullScreenElement>
   
     <Slider ref="slider" v-if="imageList.length > 0" class="h-72">
-      <div v-for="image in imageList" :key="image" @click="openInFullScreen(imageSizeUrl(image, 2048))"
+      <div v-for="image in imageList" :key="image" @click="openInFullScreen(utils.setImageSize(image, 2048))"
         class="ratio h-72">
         <div class="w-full h-2/3">
           <img :src="image" class="object-cover h-full w-full" alt="" />

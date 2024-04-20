@@ -40,7 +40,6 @@ onMounted(async () => {
 
   nextTick(() => {
     useInView(loader.value, async () => {
-
       loaderInView.value = true;
       let loaded = await load();
       hasMore.value = loaded.length > 0
@@ -55,7 +54,6 @@ onMounted(async () => {
       loaderInView.value = false;
     })
   })
-
 })
 
 </script>
@@ -68,7 +66,7 @@ onMounted(async () => {
       </div>
     </div>
 
-    <div v-if="hasMore" ref="loader" class="flex justify-center h-12">
+    <div v-if="hasMore" ref="loader" class="flex justify-center w-[100vw] h-12">
       <GadgetsLoader />
     </div>
   </div>
@@ -76,6 +74,9 @@ onMounted(async () => {
 </template>
 <style scoped>
 .thumbnail-grid {
-  @apply grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 px-8 sm:px-8 md:px-12 gap-12 my-4
+  @apply grid grid-cols-1
+  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3
+  px-8 sm:px-8 md:px-12
+  gap-12 my-4
 }
 </style>
