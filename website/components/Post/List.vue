@@ -27,7 +27,7 @@ async function getPosts() {
   hasMore.value = [...response].length > 0
 }
 
-async function load() {
+async function loadMore() {
 
   const response = await wpPosts.nextPage()
   postList.value = [...postList.value, ...response]
@@ -41,15 +41,15 @@ onMounted(async () => {
   nextTick(() => {
     useInView(loader.value, async () => {
       loaderInView.value = true;
-      let loaded = await load();
+      let loaded = await loadMore();
       hasMore.value = loaded.length > 0
       while (loaderInView.value && hasMore.value) {
-        loaded = await load()
+        loaded = await loadMore()
         hasMore.value = loaded.length > 0
-
       }
-
     })
+    //useNotInView is running parallel useInView
+    //and will stop the while loop above if triggered.
     useNotInView(loader.value, () => {
       loaderInView.value = false;
     })
@@ -59,7 +59,7 @@ onMounted(async () => {
 </script>
 <template>
 
-  <div v-if="postList" class="">
+  <div v-if="postList" class=" w-full ">
     <div class="thumbnail-grid">
       <div v-for="post in postList" :key="post.title">
         <PostPreview :post="post" class="" />

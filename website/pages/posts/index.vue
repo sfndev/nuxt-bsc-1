@@ -5,6 +5,6 @@
 </script>
 <template>
   <div class="flex w-full ">
-    <PostList category="concerts" class="mt-8 " />
+    <PostList category="products" class="mt-8 " />
   </div>
 </template>
