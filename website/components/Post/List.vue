@@ -29,7 +29,7 @@ async function getPosts() {
 
 async function loadMore() {
 
-  const response = await wpPosts.nextPage()
+  const response = await wpPosts.nextPage(props.category)
   postList.value = [...postList.value, ...response]
   hasMore.value = [...response].length > 0
   return [...response];
@@ -44,8 +44,10 @@ onMounted(async () => {
       let loaded = await loadMore();
       hasMore.value = loaded.length > 0
       while (loaderInView.value && hasMore.value) {
+       // console.log(`before ${loaderInView.value} && ${hasMore.value}`)
         loaded = await loadMore()
         hasMore.value = loaded.length > 0
+        //console.log(`after ${loaderInView.value} && ${hasMore.value}`)
       }
     })
     //useNotInView is running parallel useInView

@@ -24,7 +24,7 @@ const formattedDate = computed(() => {
   return new Intl.DateTimeFormat('default', options).format(new Date(props.post.date));
 });
 
-const post = props?.post;
+
 </script>
 
 <template>

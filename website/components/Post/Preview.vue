@@ -21,7 +21,7 @@ function toPost() {
 <template>
   <div class="container flex flex-col ">
 
-    <div click="toPost" class="image-container flex justify-center items-center   h-2/3">
+    <div @click="toPost" class="image-container flex justify-center items-center   h-2/3">
       <img @click="toPost" :src="post.featured_image" alt=""
         class="w-full h-full object-cover transition-all duration-500 hover:opacity-95  cursor-pointer" />
     </div>
