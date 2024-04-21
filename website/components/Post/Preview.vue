@@ -22,8 +22,11 @@ function toPost() {
   <div class="container flex flex-col ">
 
     <div @click="toPost" class="image-container flex justify-center items-center   h-2/3">
-      <img @click="toPost" :src="post.featured_image" alt=""
+      <img v-if="post.featured_image" @click="toPost" :src="post.featured_image" alt=""
         class="w-full h-full object-cover transition-all duration-500 hover:opacity-95  cursor-pointer" />
+      <div v-else class="flex justify-center items-center w-full h-full bg-blue-950">
+        <h1 class="text-5xl text-white font-extrabold">{{post.title}}</h1>
+      </div>
     </div>
 
     <div class="flex flex-col justify-center h-1/3 px-4 border-b  ">

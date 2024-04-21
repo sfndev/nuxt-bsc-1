@@ -10,7 +10,7 @@ export const useWpPosts = defineStore('posts', {
   }),
 
   actions: {
-    async fetch(categoryName, page = 1) {
+    async fetch(categoryName = "", page = 1) {
       const category = this.categories.find(c => c.name === categoryName);
       if (!category) {
         this.categories.push({
