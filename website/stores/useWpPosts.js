@@ -6,7 +6,13 @@ const BASE_URL = `https://public-api.wordpress.com/rest/v1.1/sites/${SITE_NAME}.
 
 export const useWpPosts = defineStore('posts', {
   state: () => ({
-    categories: []
+    categories: [],
+    searchList: {
+      posts : [],
+      currentPage: 1,
+      perPage: 1,
+      searchParams : ""
+    }
   }),
 
   actions: {
@@ -59,18 +65,64 @@ export const useWpPosts = defineStore('posts', {
       return category ? category.posts : [];
     },
 
-    async get(categoryName) {
+    async get(categoryName="",perPage = 3) {
       const category = this.categories.find(c => c.name === categoryName);
       if (!category) {
         this.categories.push({
           name: categoryName,
           posts: [],
           currentPage: 1,
-          perPage: 3
+          perPage
         });
       }
       return await this.fetch(categoryName);
     },
+    async search(searchParams, perPage = 3) {
+      // Initialize or reset the searchList for a new search
+      this.searchList = {
+        posts: [],
+        currentPage: 1,
+        perPage: perPage,
+        searchParams: searchParams
+      };
+
+      // Perform the initial search
+      return await this.performSearch();
+    },
+
+    async searchMore() {
+      // Increment the page for loading more results
+      this.searchList.currentPage += 1;
+
+      // Continue the search with the next page
+      return await this.performSearch();
+    },
+
+    async performSearch() {
+      const params = {
+        search: this.searchList.searchParams,
+        page: this.searchList.currentPage,
+        number: this.searchList.perPage
+      };
+
+      try {
+        const response = await axios.get(`${BASE_URL}/posts`, { params });
+        const newPosts = response.data.posts.map(post => post);
+
+        // Append new posts to the existing list or replace if it's the first page
+        if (this.searchList.currentPage > 1) {
+          this.searchList.posts.push(...newPosts);
+        } else {
+          this.searchList.posts = newPosts;
+        }
+
+        return this.searchList.posts;
+      } catch (error) {
+        console.error('Error fetching search results:', error);
+        return [];
+      }
+    },
+
 
     async getPost({category = null, id = null, slug = null, title = null}) {
       if (!id && !slug && !title) {
