@@ -5,6 +5,6 @@
 </script>
 <template>
   <div>
-    <PostList category="" class="mt-8 " />
+    <PostList category="concertsg" class="mt-8 " />
   </div>
 </template>

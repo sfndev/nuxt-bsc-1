@@ -8,8 +8,11 @@ import { useInView, useNotInView } from "@/composables/useInView"
 import { useScrollHandler } from "@/composables/useScrollHandler"
 
 const props = defineProps({
-  category: ""
+  category: "",
+  posts: []
 })
+
+
 
 const { largeWindow, mediumWindow, smallWindow } = useWindowSize();
 const { create } = useScrollHandler();
