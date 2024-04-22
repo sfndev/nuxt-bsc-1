@@ -14,7 +14,7 @@ const nav = useNavLinks().navLinks;
                 <div class="">
                     <NuxtLink :to="link.url">
                         <div class="hover:text-gray-300 ">
-                            <span :class="{'underline': route.path == link.url}">{{link.title}}</span>
+                            <span :class="{'underline': route.path === link.url}">{{link.title}}</span>
                         </div>
                     </NuxtLink>
                 </div>
