@@ -125,10 +125,8 @@ export const useWpPosts = defineStore('posts', {
 
             const found = this.findPost({category, id, slug, title});
             if (found) {
-                console.log("found")
                 return found;
             }
-            console.log("not found and fetching")
 
             if (slug) {
                 try {
