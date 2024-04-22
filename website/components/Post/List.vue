@@ -7,6 +7,7 @@ import {useWindowSize} from "@/composables/useWindowSize"
 import {useInView, useNotInView} from "@/composables/useInView"
 import {useScrollHandler} from "@/composables/useScrollHandler"
 import ListContainerV1 from "~/components/Post/ListContainerV1.vue";
+import ListContainerV2 from "~/components/Post/ListContainerV2.vue";
 
 const props = defineProps({
   category: ""
@@ -66,11 +67,11 @@ watch(hasMore, () => {
 
 </script>
 <template>
-  <ListContainerV1
+  <ListContainerV2
       ref="listContainer"
       :posts="postList"
       @loader-in-view="loaderInView = true"
-      @loader-not-in-view="loaderInView=false"/>
+      @loader-not-in-view="loaderInView=false"></ListContainerV2>
 
 
 </template>
