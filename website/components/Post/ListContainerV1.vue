@@ -58,7 +58,7 @@ function removeLoader(){
 <template>
   <div class=" w-full ">
     <div class="thumbnail-grid">
-      <div v-for="post in posts" :key="post.title">
+      <div v-for="post in props.posts" :key="post.title">
         <PostPreviewV1 :post="post" class=""/>
       </div>
     </div>
