@@ -16,6 +16,7 @@ export const useWpPosts = defineStore('posts', {
     }),
 
     actions: {
+
         async fetch(categoryName = "", page = 1) {
             const category = this.categories.find(c => c.name === categoryName);
             if (!category) {
@@ -116,9 +117,15 @@ export const useWpPosts = defineStore('posts', {
                 return [];
             }
         },
-
-
-        async getPost({category = null, id = null, slug = null, title = null}) {
+        
+        async getPost(
+            {
+                category = null,
+                id = null,
+                slug = null,
+                title = null
+            }
+            ) {
             if (!id && !slug && !title) {
                 return null;
             }
@@ -146,7 +153,8 @@ export const useWpPosts = defineStore('posts', {
                 slug = null,
                 title = null,
                 category = null
-            }) {
+            }
+            ) {
             const searchInCategory = (cat) => {
                 return cat.posts.find(post =>
                     (id && post.id === id) ||

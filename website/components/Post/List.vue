@@ -67,12 +67,11 @@ watch(hasMore, () => {
 
 </script>
 <template>
-  <ListContainerV2
+  <ListContainerV1
       ref="listContainer"
       :posts="postList"
       @loader-in-view="loaderInView = true"
-      @loader-not-in-view="loaderInView=false"></ListContainerV2>
-
+      @loader-not-in-view="loaderInView=false"></ListContainerV1>
 
 </template>
 <style scoped>
