@@ -15,18 +15,14 @@ const slider = ref(null)
 const posts = ref([])
 
 onMounted(async () => {
-  const response = await wpPosts.search("prod 18",5)
-  posts.value = response;
+
 })
 </script>
 
 <template>
   <div>
     <div class="mt-24">
-      <div v-for="post in posts" :key="post.ID">
-          {{post.title}}
-      </div>
-<!--      <SampleSliderGallery category="galleries" slug="my-test-post"/>-->
+        <PostSearch></PostSearch>
     </div>
   </div>
 </template>

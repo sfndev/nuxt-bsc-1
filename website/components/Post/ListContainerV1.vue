@@ -62,8 +62,8 @@ function removeLoader(){
         <PostPreviewV1 :post="post" class=""/>
       </div>
     </div>
-    <div v-if="loaderVisible" ref="loader" class="flex justify-center w-[100vw] h-12">
-      <GadgetsLoader />
+    <div ref="loader" class="flex justify-center  w-[100vw] ">
+      <GadgetsLoader  v-if="loaderVisible" />
     </div>
   </div>
 </template>
