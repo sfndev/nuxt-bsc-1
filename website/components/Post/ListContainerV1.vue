@@ -11,13 +11,15 @@ import { useWpPosts } from '~/stores/useWpPosts'
 import { useUtils } from '@/composables/useUtils'
 
 const props = defineProps({
-  posts:Object
+  posts:Object,
+  lazyLoad:false
 })
 
 const emit = defineEmits(["loader-in-view","loader-not-in-view"])
 
 defineExpose({
-  removeLoader
+  enableLoader,
+  disableLoader
 })
 
 const utils = useUtils();
@@ -33,14 +35,21 @@ const html = useHTMLContent();
 //
 
 const loader = ref(null)
-const loaderVisible = ref(true);
+const loaderVisible = ref(false);
 onMounted(() => {
+  loaderVisible.value = !!props.lazyLoad;
   nextTick(()=>{
     useInView(loader.value,()=>{
-      emit("loader-in-view")
+
+        emit("loader-in-view")
+        console.log("emitting loaderinview " + loaderVisible.value)
+
+
     })
     useNotInView(loader.value,()=>{
-      emit("loader-not-in-view")
+      if (loaderVisible.value) {
+        emit("loader-not-in-view")
+      }
     })
   })
 })
@@ -49,9 +58,14 @@ onUnmounted(() => {
 
 })
 
-function removeLoader(){
+function disableLoader(){
   loaderVisible.value = false;
 }
+function enableLoader(){
+  loaderVisible.value = true;
+  console.log(`loader enabled ${loaderVisible.value}`)
+}
+
 
 </script>
 

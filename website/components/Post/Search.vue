@@ -34,7 +34,7 @@ const searchInput = ref("")
 
 onMounted(async () => {
 
-  //posts.value = await wpPosts.search("post",2)
+
 })
 
 onUnmounted(() => {
@@ -43,7 +43,10 @@ onUnmounted(() => {
 const searching = ref(false)
 
 async function handleSearch() {
+  console.log("handling search")
+  postContainer.value.enableLoader()
   posts.value = await wpPosts.search(searchInput.value, 3)
+
 }
 
 async function searchPosts() {
@@ -53,8 +56,10 @@ async function searchPosts() {
 }
 
 async function searchMore() {
-  if (!searchInput.value) return
+  if (!searchInput.value || posts.value.length === 0) return
+  console.log('searching more')
   const response = await wpPosts.searchMore();
+  if (response.length === 0) postContainer.value.disableLoader();
   posts.value = [...posts.value, ...response]
 }
 
@@ -78,6 +83,7 @@ async function searchMore() {
           ref="postContainer"
           :posts="posts"
           @loader-in-view="searchMore"
+
       ></PostListContainerV1>
     </div>
   </div>
