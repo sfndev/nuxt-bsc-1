@@ -92,7 +92,8 @@ export const useWpPosts = defineStore('posts', {
         async searchMore() {
             this.searchList.currentPage += 1;
             console.log(`current page: ${this.searchList.currentPage}`);
-            return await this.performSearch();
+            const response = await this.performSearch();
+            return response;
         },
 
         async performSearch() {
@@ -112,7 +113,7 @@ export const useWpPosts = defineStore('posts', {
                     this.searchList.posts = newPosts;
                 }
 
-                return this.searchList.posts;
+                return newPosts
             } catch (error) {
                 console.error('Error fetching search results:', error);
                 return [];

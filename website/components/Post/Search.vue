@@ -36,6 +36,8 @@ const loader = ref(null);
 const loaderVisible = ref(true);
 const loaderInView = ref(false);
 
+const hasMorePosts = ref(true);
+
 onMounted(async () => {
   await nextTick(() => {
     enableLazyLoad()
@@ -54,23 +56,27 @@ const searching = ref(false)
 //
 // }
 
+
+
 async function searchPosts() {
+  posts.value = []
   posts.value = await wpPosts.search(searchInput.value, 2)
   loaderVisible.value = true;
-  await searchMore()
+  await searchMore();
 }
 
 async function searchMore() {
   if (posts.value.length < 1) {return}
-  console.log('searching more')
+
 
   let response = await wpPosts.searchMore();
   posts.value = [...posts.value, ...response]
-  let hasMore = response.length > 0;
-  while(hasMore && loaderInView.value) {
+  hasMorePosts.value = response.length > 0;
+  while(hasMorePosts.value && loaderInView.value) {
+    console.log(`searching more , hasmore:${hasMorePosts.value} loader ${loaderInView.value}`)
     response = await wpPosts.searchMore();
     posts.value = [...posts.value, ...response];
-    hasMore = response.length > 0;
+    hasMorePosts.value = response.length > 0;
     if (!loaderInView.value){
       break;
     }
@@ -81,18 +87,21 @@ async function searchMore() {
 async function enableLazyLoad(){
   useInView(loader.value, async ()=>{
     loaderInView.value = true
-    console.log("loader in view")
+    //console.log("loader in view")
     await searchMore();
   })
   useNotInView(loader.value,()=>{
       loaderInView.value = false
-    console.log("loader not in view")
+     //console.log("loader not in view")
   })
 }
 
 </script>
 
 <template>
+  <div class="fixed top-24 ">
+    {{loaderInView}}
+  </div>
   <div class=" ">
     <div class="flex justify-center w-full ">
       <div class="flex w-full lg:w-1/2 px-3">
@@ -115,6 +124,7 @@ async function enableLazyLoad(){
           </div>
     </div>
   </div>
+
 
 </template>
 
