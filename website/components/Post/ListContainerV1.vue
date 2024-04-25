@@ -12,7 +12,6 @@ import { useUtils } from '@/composables/useUtils'
 
 const props = defineProps({
   posts:Object,
-  lazyLoad:false
 })
 
 const emit = defineEmits(["loader-in-view","loader-not-in-view"])
@@ -37,26 +36,27 @@ const html = useHTMLContent();
 const loader = ref(null)
 const loaderVisible = ref(false);
 onMounted(() => {
-  loaderVisible.value = !!props.lazyLoad;
+
   nextTick(()=>{
-    useInView(loader.value,()=>{
-
-        emit("loader-in-view")
-        console.log("emitting loaderinview " + loaderVisible.value)
-
-
-    })
-    useNotInView(loader.value,()=>{
-      if (loaderVisible.value) {
-        emit("loader-not-in-view")
-      }
-    })
+    //enableLazyLoad()
   })
 })
 
 onUnmounted(() => {
 
 })
+
+function enableLazyLoad(){
+  useInView(loader.value,()=>{
+    emit("loader-in-view")
+    console.log("emitting loaderinview " + loaderVisible.value)
+  })
+  useNotInView(loader.value,()=>{
+    if (loaderVisible.value) {
+      emit("loader-not-in-view")
+    }
+  })
+}
 
 function disableLoader(){
   loaderVisible.value = false;
@@ -76,9 +76,9 @@ function enableLoader(){
         <PostPreviewV1 :post="post" class=""/>
       </div>
     </div>
-    <div ref="loader" class="flex justify-center  w-[100vw] ">
-      <GadgetsLoader  v-if="loaderVisible" />
-    </div>
+<!--    <div ref="loader" class="flex justify-center  w-[100vw] ">-->
+<!--      <GadgetsLoader  v-if="loaderVisible" />-->
+<!--    </div>-->
   </div>
 </template>
 

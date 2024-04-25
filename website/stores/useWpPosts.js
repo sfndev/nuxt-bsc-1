@@ -90,7 +90,8 @@ export const useWpPosts = defineStore('posts', {
         },
 
         async searchMore() {
-            this.searchList.currentPage
+            this.searchList.currentPage += 1;
+            console.log(`current page: ${this.searchList.currentPage}`);
             return await this.performSearch();
         },
 
