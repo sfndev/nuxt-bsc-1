@@ -92,7 +92,7 @@ async function enableLazyLoad() {
     <div class="flex justify-center w-full ">
       <div class="flex w-full lg:w-1/2 px-3">
         <div class="w-full">
-          <input @input="searchPosts" @keydown.enter="searchPosts" v-model="searchInput" type="text" class="w-full h-10 border-4"
+          <input @keydown.enter="searchPosts" v-model="searchInput" type="text" class="w-full h-10 border-4"
                  placeholder="Search..."/>
         </div>
         <div class="flex items-center ">
@@ -102,6 +102,7 @@ async function enableLazyLoad() {
     </div>
     <div>
       <PostListContainerV2
+
           ref="postContainer"
           :posts="posts"
       ></PostListContainerV2>

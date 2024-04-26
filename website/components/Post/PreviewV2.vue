@@ -55,6 +55,9 @@ function updateExcerptContainerWidth() {
   excerptContainerWidth.value = excerptContainer.value ? excerptContainer.value.clientWidth : 0;
 }
 
+function extractExcerpt(post){
+ return post.excerpt ? html.extractAll(post.excerpt, 'p')[0].replace("[&hellip;]", "") : ""
+}
 
 const lineClamp = computed(() => {
 
@@ -85,7 +88,7 @@ function toPost() {
            :style="excerptLineClamp"
       >
         <p class="h-full">
-          {{ html.extractAll(post.excerpt, 'p')[0].replace("[&hellip;]", "") }}
+          {{ extractExcerpt(props.post) }}
           <span @click="toPost" class="hover:font-bold transition-all duration-200 cursor-pointer">...</span>
         </p>
 
