@@ -27,36 +27,29 @@ const wpPosts = useWpPosts();
 const html = useHTMLContent();
 
 //
-const postContainer = ref(null)
+
+
 
 const posts = ref([])
 const searchInput = ref("")
 
+const postContainer = ref(null)
 const loader = ref(null);
-const loaderVisible = ref(true);
+const loaderVisible = computed(() => {
+  return posts.value.length > 0 && hasMorePosts.value
+});
 const loaderInView = ref(false);
-
 const hasMorePosts = ref(true);
 
 onMounted(async () => {
   await nextTick(() => {
     enableLazyLoad()
   })
-
 })
 
 onUnmounted(() => {
 
 })
-const searching = ref(false)
-
-// async function handleSearch() {
-//   console.log("handling search")
-//   posts.value = await wpPosts.search(searchInput.value, 3)
-//
-// }
-
-
 
 async function searchPosts() {
   posts.value = []
@@ -66,47 +59,41 @@ async function searchPosts() {
 }
 
 async function searchMore() {
-  if (posts.value.length < 1) {return}
-
-
-  let response = await wpPosts.searchMore();
-  posts.value = [...posts.value, ...response]
-  hasMorePosts.value = response.length > 0;
-  while(hasMorePosts.value && loaderInView.value) {
-    console.log(`searching more , hasmore:${hasMorePosts.value} loader ${loaderInView.value}`)
-    response = await wpPosts.searchMore();
-    posts.value = [...posts.value, ...response];
-    hasMorePosts.value = response.length > 0;
-    if (!loaderInView.value){
-      break;
+  try {
+    if (posts.value.length < 1) {
+      return
     }
+    const response = await wpPosts.searchMore();
+    hasMorePosts.value = response.length > 0;
+    posts.value = [...posts.value, ...response];
+    if (hasMorePosts.value && loaderInView.value) {
+      await searchMore();
+    }
+  } catch (error) {
+    console.error("An error occurred during loading:", error);
   }
-
 }
 
-async function enableLazyLoad(){
-  useInView(loader.value, async ()=>{
+async function enableLazyLoad() {
+  useInView(loader.value, async () => {
     loaderInView.value = true
-    //console.log("loader in view")
     await searchMore();
   })
-  useNotInView(loader.value,()=>{
-      loaderInView.value = false
-     //console.log("loader not in view")
+  useNotInView(loader.value, () => {
+    loaderInView.value = false
   })
 }
 
 </script>
 
 <template>
-  <div class="fixed top-24 ">
-    {{loaderInView}}
-  </div>
+
   <div class=" ">
     <div class="flex justify-center w-full ">
       <div class="flex w-full lg:w-1/2 px-3">
         <div class="w-full">
-          <input @keydown.enter="searchPosts" v-model="searchInput" type="text" class="w-full h-10 border-4" placeholder="Search..."/>
+          <input @keydown.enter="searchPosts" v-model="searchInput" type="text" class="w-full h-10 border-4"
+                 placeholder="Search..."/>
         </div>
         <div class="flex items-center ">
           <button @click="searchPosts" class="bg-blue-500 p-2  ">Search</button>
@@ -119,9 +106,9 @@ async function enableLazyLoad(){
           ref="postContainer"
           :posts="posts"
       ></PostListContainerV1>
-          <div ref="loader" class="flex justify-center  w-[100vw] ">
-            <GadgetsLoader v-if="loaderVisible"   />
-          </div>
+      <div ref="loader" class="flex justify-center  w-[100vw] ">
+        <GadgetsLoader v-if="loaderVisible"/>
+      </div>
     </div>
   </div>
 

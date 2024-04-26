@@ -91,9 +91,8 @@ export const useWpPosts = defineStore('posts', {
 
         async searchMore() {
             this.searchList.currentPage += 1;
-            console.log(`current page: ${this.searchList.currentPage}`);
-            const response = await this.performSearch();
-            return response;
+            return await this.performSearch();
+
         },
 
         async performSearch() {
@@ -119,7 +118,7 @@ export const useWpPosts = defineStore('posts', {
                 return [];
             }
         },
-        
+
         async getPost(
             {
                 category = null,
@@ -178,7 +177,7 @@ export const useWpPosts = defineStore('posts', {
                         return foundPost;
                     }
                 }
-                return null; // No post found in any category
+                return null;
             }
         }
     }
