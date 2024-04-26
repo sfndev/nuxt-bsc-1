@@ -74,7 +74,8 @@ function toPost() {
 
     <div class="flex justify-end   w-1/3 h-full">
       <div class=" w-full border-black " style="aspect-ratio: 1.618">
-        <img :src="post.featured_image" class="h-full w-full object-right-top   object-contain" alt="">
+        <img v-if="post.featured_image" :src="post.featured_image" class="h-full w-full object-right-top   object-contain" alt="">
+        <div v-else class="w-full h-full bg-blue-950" ></div>
       </div>
     </div>
 
