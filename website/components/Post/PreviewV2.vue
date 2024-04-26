@@ -8,7 +8,7 @@ import {useInView} from "@/composables/useInView";
 import {useScrollHandler} from "@/composables/useScrollHandler"
 import {useHTMLContent} from '~/composables/useHTMLContent'
 import {useWpPosts} from '~/stores/useWpPosts'
-
+import {useUtils} from "~/composables/useUtils.js";
 
 const route = useRoute();
 const router = useRouter();
@@ -17,7 +17,7 @@ const scroll = useScrollHandler();
 
 const wpPosts = useWpPosts();
 const html = useHTMLContent();
-
+const utils =  useUtils()
 
 const props = defineProps({
   post: Object
@@ -74,7 +74,7 @@ function toPost() {
 
     <div class="flex justify-end   w-1/3 h-full">
       <div class=" w-full border-black " style="aspect-ratio: 1.618">
-        <img v-if="post.featured_image" :src="post.featured_image" class="h-full w-full object-right-top   object-contain" alt="">
+        <img v-if="post.featured_image" :src="utils.setImageSizeV2(post.featured_image,512)" class="h-full w-full object-right-top   object-contain" alt="">
         <div v-else class="w-full h-full bg-blue-950" ></div>
       </div>
     </div>

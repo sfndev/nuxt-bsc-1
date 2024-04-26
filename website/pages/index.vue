@@ -22,6 +22,9 @@ onMounted(async () => {
 
 <template>
   <div>
+    <div>
+      <SampleSliderGallery category="concerts" slug="my-test-gallery" />
+    </div>
     <div class="mt-24">
 <!--          <PostListContainerV2 :posts="posts" />-->
         <PostSearch></PostSearch>
