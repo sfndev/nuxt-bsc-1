@@ -47,7 +47,7 @@ onMounted(async () => {
   })
 })
 
-onUnmounted(() => {
+onUnmounted(async () => {
 
 })
 
@@ -92,14 +92,13 @@ async function enableLazyLoad() {
     <div class="flex justify-center w-full ">
       <div class="flex w-full lg:w-1/2 px-3">
         <div class="w-full">
-          <input @keydown.enter="searchPosts" v-model="searchInput" type="text" class="w-full h-10 border-4"
+          <input @input="searchPosts" @keydown.enter="searchPosts" v-model="searchInput" type="text" class="w-full h-10 border-4"
                  placeholder="Search..."/>
         </div>
         <div class="flex items-center ">
           <button @click="searchPosts" class="bg-blue-500 p-2  ">Search</button>
         </div>
       </div>
-
     </div>
     <div>
       <PostListContainerV1
