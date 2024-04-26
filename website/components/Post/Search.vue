@@ -101,10 +101,10 @@ async function enableLazyLoad() {
       </div>
     </div>
     <div>
-      <PostListContainerV1
+      <PostListContainerV2
           ref="postContainer"
           :posts="posts"
-      ></PostListContainerV1>
+      ></PostListContainerV2>
       <div ref="loader" class="flex justify-center  w-[100vw] ">
         <GadgetsLoader v-if="loaderVisible"/>
       </div>

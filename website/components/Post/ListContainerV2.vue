@@ -15,10 +15,10 @@ const props = defineProps({
   posts: Object
 })
 
-const emit = defineEmits(["loader-in-view", "loader-not-in-view"])
+const emit = defineEmits()
 
 defineExpose({
-  removeLoader
+
 })
 
 const utils = useUtils();
@@ -33,35 +33,22 @@ const html = useHTMLContent();
 
 //
 
-const loader = ref(null)
-const loaderVisible = ref(true);
 onMounted(() => {
-  nextTick(() => {
-    useInView(loader.value, () => {
-      emit("loader-in-view")
-    })
-    useNotInView(loader.value, () => {
-      emit("loader-not-in-view")
-    })
-  })
+
 })
 
 onUnmounted(() => {
 
 })
 
-function removeLoader() {
-  loaderVisible.value = false;
-}
-
 </script>
 
 <template>
   <div class="flex flex-col space-y-4 px-6   justify-center items-center  border-black w-full  pt-0">
     <PreviewV2 v-if="posts" v-for="post in posts" :post="post" class=" "></PreviewV2>
-    <div v-if="loaderVisible" ref="loader" class="flex justify-center h-12">
-      <GadgetsLoader/>
-    </div>
+<!--    <div v-if="loaderVisible" ref="loader" class="flex justify-center h-12">-->
+<!--      <GadgetsLoader/>-->
+<!--    </div>-->
   </div>
 </template>
 <style scoped>
