@@ -97,7 +97,6 @@ async function watchLazyLoader() {
 <template>
   <div class="fixed top-24 bg-white">
     length {{posts.length}}
-
   </div>
   <div>
     <PostListContainerV1 :posts class="mt-8 "/>
