@@ -17,8 +17,7 @@ const props = defineProps({
 const emit = defineEmits(["loader-in-view","loader-not-in-view"])
 
 defineExpose({
-  enableLoader,
-  disableLoader
+
 })
 
 const utils = useUtils();
@@ -46,25 +45,7 @@ onUnmounted(() => {
 
 })
 
-function enableLazyLoad(){
-  useInView(loader.value,()=>{
-    emit("loader-in-view")
-    console.log("emitting loaderinview " + loaderVisible.value)
-  })
-  useNotInView(loader.value,()=>{
-    if (loaderVisible.value) {
-      emit("loader-not-in-view")
-    }
-  })
-}
 
-function disableLoader(){
-  loaderVisible.value = false;
-}
-function enableLoader(){
-  loaderVisible.value = true;
-  console.log(`loader enabled ${loaderVisible.value}`)
-}
 
 
 </script>

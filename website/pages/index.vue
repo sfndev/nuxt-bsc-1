@@ -6,6 +6,7 @@ import { useWpPosts } from '~/stores/useWpPosts'
 import { useWindowSize } from "@/composables/useWindowSize"
 import { useInView } from "@/composables/useInView"
 import { useScrollHandler } from "@/composables/useScrollHandler"
+import SearchWpPosts from "~/components/Post/SearchWpPosts.vue";
 const wpPosts = useWpPosts();
 const html = useHTMLContent();
 const imageList = ref([])
@@ -27,7 +28,7 @@ onMounted(async () => {
     </div>
     <div class="mt-24">
 <!--          <PostListContainerV2 :posts="posts" />-->
-        <PostSearch></PostSearch>
+        <SearchWpPosts></SearchWpPosts>
     </div>
   </div>
 </template>
