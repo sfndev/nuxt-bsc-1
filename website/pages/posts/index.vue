@@ -34,15 +34,13 @@ const hasMorePosts = ref(true);
 
 //
 
-const category = ref("concerts")
+const category = ref("")
 const perPage = ref(4)
 const posts = ref([])
 
 onMounted(() => {
   getPosts()
-  nextTick(() => {
-    watchLazyLoader();
-  })
+  watchLazyLoader();
 
 })
 
@@ -72,16 +70,18 @@ async function loadMore() {
     const response = await wpPosts.nextPage(category.value)
     hasMorePosts.value = response.length > 0
     posts.value = [...posts.value, ...response];
+    setTimeout(async()=>{
+      if (loaderInView.value && hasMorePosts.value) {
+       //console.log(` in getPosts loader ${loaderInView.value}`)
+        await loadMore();
+      }
+    },500)
 
-    if (loaderInView.value && hasMorePosts.value) {
-      //console.log(`loader: ${loaderInView.value}`);
-      await loadMore();
-    }
   } catch (error) {
     console.log(error);
   }
 }
-
+const notInViewEmissions = ref(0)
 async function watchLazyLoader() {
   useInView(loader.value, async () => {
     loaderInView.value = true
@@ -89,17 +89,20 @@ async function watchLazyLoader() {
   })
   useNotInView(loader.value, () => {
     loaderInView.value = false
+    notInViewEmissions.value++;
     console.log("not in view")
-  })
+  },0.1)
 }
 
 </script>
 <template>
   <div class="fixed top-24 bg-white">
-    length {{posts.length}}
+    length {{posts.length}} inview {{loaderInView}} notinViews {{notInViewEmissions}}
   </div>
+
+
   <div>
-    <PostListContainerV1 :posts class="mt-8 "/>
+    <PostListContainerV2 :posts class="mt-8 "/>
   </div>
   <div ref="loader" class="flex justify-center  w-[100vw] ">
     <GadgetsLoader v-if="showLoader"/>

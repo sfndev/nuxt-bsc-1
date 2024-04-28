@@ -81,7 +81,7 @@ async function enableLazyLoad() {
   })
   useNotInView(loader.value, () => {
     loaderInView.value = false
-  })
+  },0.1)
 }
 
 </script>
