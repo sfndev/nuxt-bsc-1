@@ -8,12 +8,13 @@ const slug = ref(String)
 const wpPosts = useWpPosts();
 const post = ref(null);
 const heading = ref(null)
+defineProps({
+  category: String,
+})
 
 const html = useHTMLContent();
 
 onMounted(async() =>{
-
-
 
     slug.value = route.params.slug
     post.value = await wpPosts.getPost({category:'concerts',slug:slug.value})

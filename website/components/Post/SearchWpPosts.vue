@@ -43,7 +43,7 @@ const hasMorePosts = ref(true);
 
 onMounted(async () => {
   await nextTick(() => {
-    enableLazyLoad()
+    watchLazyLoader()
   })
 })
 
@@ -74,7 +74,7 @@ async function searchMore() {
   }
 }
 
-async function enableLazyLoad() {
+async function watchLazyLoader() {
   useInView(loader.value, async () => {
     loaderInView.value = true
     await searchMore();
