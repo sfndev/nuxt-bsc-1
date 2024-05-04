@@ -17,7 +17,8 @@ const html = useHTMLContent();
 onMounted(async() =>{
 
     slug.value = route.params.slug
-    post.value = await wpPosts.getPost({category:'concerts',slug:slug.value})
+    post.value = await wpPosts.getPost({category: route.query.categories,slug:slug.value})
+  console.log(`query is ${route.query.category} post`)
 
 })
 

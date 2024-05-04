@@ -102,7 +102,7 @@ async function watchLazyLoader() {
 
 
   <div>
-    <PostListContainerV2 :posts class="mt-8 "/>
+    <PostListContainerV1 :posts class="mt-8 "/>
   </div>
   <div ref="loader" class="flex justify-center  w-[100vw] ">
     <GadgetsLoader v-if="showLoader"/>

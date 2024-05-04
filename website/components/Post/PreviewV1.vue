@@ -16,7 +16,9 @@ const formattedDate = computed(() => {
 });
 
 function toPost() {
-  router.push(`/posts/${props.post.slug}`);
+  console.log(`in list ${Object.keys(post.categories)}`)
+  const categories = Object.keys(post.categories);
+  router.push({path: `/posts/${props.post.slug}`,query: {categories: categories}});
 }
 </script>
 
